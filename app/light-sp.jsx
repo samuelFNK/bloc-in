@@ -1,19 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, LayoutAnimation} from 'react-native';
 import { stretchExecises } from '../constants/stretch-exercises';
 
 const LightSP = () => {
 
     const [program, setProgram] = useState([]);
     const [expandedId, setExpandedId] = useState(null);
+    const [activeId, setActiveId] = useState(null);
+    const [timeLeft, setTimeLeft] = useState(0);
+    const [isPrep, setIsPrep] = useState(false);
+    const [completedIds, setCompletedIds] = useState([]);
 
+    //fetch exercises
     useEffect(() => {
         const execises = [...stretchExecises].sort(() => 0.5 - Math.random()).slice(0, 3);
         setProgram(execises);
     }, []);
 
+    //timer
+    useEffect(() => {
+        let interval = null;
+
+        if(activeId !== null && timeLeft > 0) {
+            interval = setInterval(() => {
+                setTimeLeft(prev => prev - 1);
+            }, 1000);
+        } else if (activeId !== null && timeLeft === 0) {
+            if(isPrep) {
+                const currentStretch = program.find(s => s.id === activeId);
+                setIsPrep(false);
+                setTimeLeft(currentStretch.durationSec);
+            } else {
+                setCompletedIds(prev => [...prev, activeId]);
+                setActiveId(null);
+                LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+                setExpandedId(null);
+            }
+        }
+
+        return () => clearInterval(interval);
+    }, [activeId, timeLeft, isPrep]);
+
+
     const toggleExpanded = (id) => {
+        if (expandedId === id) { setActiveId(null); }
         setExpandedId(expandedId === id ? null : id); //if already selected, set null
+    };
+
+    const startTimer = (item) => {
+        setActiveId(item.id);
+        setIsPrep(true);
+        setTimeLeft(3);
     };
 
     return ( 
@@ -23,18 +60,26 @@ const LightSP = () => {
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => {
                     const isExpanded = expandedId === item.id;
+                    const isTiming = activeId === item.id;  
+                    const isCompleted = completedIds.includes(item.id);
 
                     return (
                         <TouchableOpacity
                             activeOpacity={0.8}
                             onPress={() => toggleExpanded(item.id)}
-                            style={[styles.exerciseCard, isExpanded && styles.expandCard]}
+                            style={[styles.exerciseCard, isExpanded && styles.expandCard, isCompleted && styles.completedCard]}
                         >
-                            <Text style={styles.exerciseTitle}>{item.title}</Text>
-
+                            <View style={styles.headerRow}>
+                                <Text style={[styles.exerciseTitle, isCompleted && styles.completedText]}>
+                                    {item.title} {isCompleted && '✓'}
+                                </Text>
+                            </View>
+                            
                             {/*content preview*/}
                             {!isExpanded && (
-                                <Text numberOfLines={1} style={styles.exerciseInfo}>{item.desc}</Text>
+                                <Text numberOfLines={1} style={styles.exerciseInfo}>
+                                    {isCompleted ? 'Done!' : item.desc}
+                                </Text>
                             )}
 
                             {/*expanded content*/}
@@ -46,10 +91,24 @@ const LightSP = () => {
                                     </View>
 
                                     <Text style={styles.fullDesc}>{item.desc}</Text>
-                                    <Text style={styles.timerTag}>{item.durationSec} Sec</Text>
-                                    <TouchableOpacity style={styles.timerStartBtn}>
-                                        <Text style={styles.tmerBtnText}>Start Timer</Text>
-                                    </TouchableOpacity>
+
+                                    {isTiming ? (
+                                        <View style={[styles.timerStartBtn, isPrep ? styles.prepMode : styles.activeMode]}>
+                                            <Text style={styles.tmerBtnText}>
+                                                {isPrep ? `READY: ${timeLeft}` : `GO: ${timeLeft}s`}
+                                            </Text>
+                                        </View>
+                                    ) : (
+                                        <View>
+                                            <Text style={styles.timerTag}>{item.durationSec} Sec</Text>
+                                            <TouchableOpacity 
+                                                style={styles.timerStartBtn} 
+                                                onPress={() => startTimer(item)}
+                                            >
+                                                <Text style={styles.tmerBtnText}>Start Timer</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    )}
                                 </View>
                             )}
 
@@ -67,7 +126,7 @@ export default LightSP
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f5f5f5', // Light gray background
+        backgroundColor: '#f5f5f5',
         paddingTop: 50,
         paddingHorizontal: 20,
     },
@@ -76,9 +135,7 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 12,
         marginBottom: 15,
-        // Shadow for Android
         elevation: 3,
-        // Shadow for iOS
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
@@ -87,9 +144,19 @@ const styles = StyleSheet.create({
         borderColor: 'transparent',
     },
     expandCard: {
-        borderColor: '#ffe600', // Highlight border when open
+        borderColor: '#ffe600',
         borderWidth: 1,
-        elevation: 5,
+    },
+    // New style for finished stretches
+    completedCard: {
+        backgroundColor: '#eaffea', // Very light green
+        borderColor: '#4caf50',
+        borderWidth: 1,
+        elevation: 1, // Flatter look when done
+    },
+    completedText: {
+        color: '#2e7d32', // Darker green text
+        textDecorationLine: 'line-through', // Optional: adds a visual "cross off"
     },
     exerciseTitle: {
         fontSize: 20,
@@ -129,16 +196,24 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     timerStartBtn: {
-        backgroundColor: '#333', // Dark slate button
+        backgroundColor: '#333',
         paddingVertical: 12,
         borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center',
     },
-    tmerBtnText: { // Matching your JSX typo "tmerBtnText"
-        color: '#ffe600', // Yellow text on dark button
+    prepMode: { backgroundColor: '#ff9800' },
+    activeMode: { backgroundColor: '#4caf50' },
+    tmerBtnText: {
+        color: '#fff',
         fontWeight: 'bold',
         fontSize: 16,
         textTransform: 'uppercase',
+    },
+    headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 5,
     },
 });
