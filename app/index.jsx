@@ -3,14 +3,9 @@ import { Link } from 'expo-router'
 const Home = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Homeeeeeeeeeee</Text>
-            <Text>wowwww</Text>
-
-            <View style={styles.card}>
-                <Text>cards</Text>
-            </View>
-
-            <Link href="/strech-index">Strech index link</Link>
+           
+            <Link href="/stretch-index" style={styles.card}>Stretch</Link>
+            
         </View>
     )
 }
@@ -25,7 +20,7 @@ const styles = StyleSheet.create({
     },
     card: {
         backgroundColor: '#fbff00',
-        padding: 20,
+        padding: 50,
         borderRadius: 5,
         boxShadow: '4px 4px #828b00',
 
