@@ -3,12 +3,12 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import { stretchExecises } from '../constants/stretch-exercises';
 import ExerciseCard from '../components/ExerciseCard';
 
-const LightSP = () => {
+const FullSP = () => {
     const [program, setProgram] = useState([]);
     const [completedIds, setCompletedIds] = useState([]);
 
     useEffect(() => {
-        const exercises = [...stretchExecises].sort(() => 0.5 - Math.random()).slice(0, 3);
+        const exercises = [...stretchExecises].sort(() => 0.5 - Math.random()).slice(0, 7);
         setProgram(exercises);
     }, []);
 
@@ -35,7 +35,7 @@ const LightSP = () => {
     );
 };
 
-export default LightSP;
+export default FullSP;
 
 const styles = StyleSheet.create({
     container: {

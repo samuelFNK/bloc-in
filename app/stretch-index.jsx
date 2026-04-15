@@ -7,9 +7,9 @@ const StretchIndex = () => {
             
             <Text style={styles.title}>Programs</Text>
 
-            <Link href="/light-sp" style={styles.program_card}>Stretch</Link>
-            <Link href="/" style={styles.program_card}>Stretch</Link>  
-            <Link href="/" style={styles.program_card}>Stretch</Link> 
+            <Link href="/light-sp" style={styles.program_card}>Light</Link>
+            <Link href="/medium-sp" style={styles.program_card}>Medium</Link>  
+            <Link href="/full-sp" style={styles.program_card}>Full</Link> 
                     
         </View>
     )
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
 
     },
     program_card: {
+        textAlign: 'center',
         backgroundColor: '#ffffff',
         borderRadius: 5,
         padding: 50,
@@ -39,7 +40,6 @@ const styles = StyleSheet.create({
 
     },
     title: {
-        fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 20,
     }
 })

@@ -28,5 +28,17 @@ export const stretchExecises = [
         title: 'Stretch 5',
         desc: 'Explanation 5...',
         durationSec: 5,
+    },
+    {
+        id: 6,
+        title: '6',
+        desc: 'Explanation 6...',
+        durationSec: 6,
+    },
+    {
+        id: 7,
+        title: 'Stretch 7',
+        desc: 'Explanation 7...',
+        durationSec: 7,
     }
 ];

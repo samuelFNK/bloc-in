@@ -4,7 +4,7 @@ const Home = () => {
     return (
         <View style={styles.container}>
            
-            <Link href="/stretch-index" style={styles.card}>Stretch</Link>
+            <Link href="/stretch-index" style={styles.card}>Stretch-index</Link>
             
         </View>
     )
@@ -25,8 +25,4 @@ const styles = StyleSheet.create({
         boxShadow: '4px 4px #828b00',
 
     },
-    title: {
-        fontWeight: 'bold',
-        fontSize: 18,
-    }
 })
