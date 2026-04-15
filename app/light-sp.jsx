@@ -34,7 +34,6 @@ const LightSP = () => {
                 setCompletedIds(prev => [...prev, activeId]);
                 setActiveId(null);
                 LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-                setExpandedId(null);
             }
         }
 
@@ -43,8 +42,7 @@ const LightSP = () => {
 
 
     const toggleExpanded = (id) => {
-        if (expandedId === id) { setActiveId(null); }
-        setExpandedId(expandedId === id ? null : id); //if already selected, set null
+        setExpandedId(expandedId === id ? null : id);
     };
 
     const startTimer = (item) => {
@@ -77,8 +75,8 @@ const LightSP = () => {
                             
                             {/*content preview*/}
                             {!isExpanded && (
-                                <Text numberOfLines={1} style={styles.exerciseInfo}>
-                                    {isCompleted ? 'Done!' : item.desc}
+                                <Text numberOfLines={1} style={[styles.exerciseInfo, isTiming && styles.activeTimerPreview]}>
+                                    {isTiming ? (`${isPrep ? 'READY' : 'GO'}: ${timeLeft}s`) : isCompleted ? ('Done! ✓') : (item.desc)}
                                 </Text>
                             )}
 
@@ -102,10 +100,10 @@ const LightSP = () => {
                                         <View>
                                             <Text style={styles.timerTag}>{item.durationSec} Sec</Text>
                                             <TouchableOpacity 
-                                                style={styles.timerStartBtn} 
+                                                style={[styles.timerStartBtn, isCompleted && styles.completedTimerBtn]} 
                                                 onPress={() => startTimer(item)}
                                             >
-                                                <Text style={styles.tmerBtnText}>Start Timer</Text>
+                                                <Text style={styles.tmerBtnText}>{isCompleted ? 'Restart Timer' : 'Start Timer'}</Text>
                                             </TouchableOpacity>
                                         </View>
                                     )}
@@ -147,16 +145,15 @@ const styles = StyleSheet.create({
         borderColor: '#ffe600',
         borderWidth: 1,
     },
-    // New style for finished stretches
     completedCard: {
-        backgroundColor: '#eaffea', // Very light green
+        backgroundColor: '#eaffea',
         borderColor: '#4caf50',
         borderWidth: 1,
-        elevation: 1, // Flatter look when done
+        elevation: 1,
     },
     completedText: {
-        color: '#2e7d32', // Darker green text
-        textDecorationLine: 'line-through', // Optional: adds a visual "cross off"
+        color: '#2e7d32',
+        textDecorationLine: 'line-through',
     },
     exerciseTitle: {
         fontSize: 20,
@@ -202,6 +199,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    activeTimerPreview: {
+    color: '#333',
+    fontWeight: 'bold',
+},
     prepMode: { backgroundColor: '#ff9800' },
     activeMode: { backgroundColor: '#4caf50' },
     tmerBtnText: {
@@ -209,6 +210,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
         textTransform: 'uppercase',
+    },
+    completedTimerBtn: {
+        backgroundColor: '#2e7d32',
     },
     headerRow: {
     flexDirection: 'row',
