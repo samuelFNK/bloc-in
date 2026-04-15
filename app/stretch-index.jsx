@@ -4,8 +4,6 @@ import { Link } from 'expo-router'
 const StretchIndex = () => {
     return (
         <View style={styles.card_container}>
-            
-            <Text style={styles.title}>Programs</Text>
 
             <Link href="/light-sp" style={styles.program_card}>Light</Link>
             <Link href="/medium-sp" style={styles.program_card}>Medium</Link>  
@@ -24,22 +22,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     card_container: {
-        backgroundColor: '#ffe600',
+        flex: 1,
+        backgroundColor: '#e7e7e7',
         padding: 50,
         borderRadius: 5,
-        boxShadow: '4px 4px #d8c300',
-
     },
     program_card: {
+        fontSize: 15,
         textAlign: 'center',
         backgroundColor: '#ffffff',
-        borderRadius: 5,
+        borderRadius: 12,
         padding: 50,
-        margin:5,
+        margin:12,
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        borderWidth: 1,
+        borderColor: 'transparent',
         
 
     },
-    title: {
-        fontSize: 20,
-    }
 })

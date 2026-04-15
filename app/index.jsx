@@ -4,7 +4,7 @@ const Home = () => {
     return (
         <View style={styles.container}>
            
-            <Link href="/stretch-index" style={styles.card}>Stretch-index</Link>
+            <Link href="/stretch-index" style={styles.card}>Stretch</Link>
             
         </View>
     )
@@ -19,10 +19,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     card: {
-        backgroundColor: '#fbff00',
+        fontSize: 15,
+        backgroundColor: '#ffffff',
         padding: 50,
-        borderRadius: 5,
-        boxShadow: '4px 4px #828b00',
+        borderRadius: 12,
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        borderWidth: 1,
+        borderColor: 'transparent',
 
     },
 })

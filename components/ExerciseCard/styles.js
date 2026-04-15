@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 20,
         borderRadius: 12,
-        marginBottom: 15,
+        margin: 10,
         elevation: 3,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
         borderColor: 'transparent',
     },
     expandCard: {
-        borderColor: '#ffe600',
+        borderColor: '#a8a8a8',
         borderWidth: 1,
     },
     completedCard: {
