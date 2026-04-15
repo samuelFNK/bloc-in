@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, LayoutAnimation } from 'react-native';
 import { styles } from './styles';
 
-const ExerciseCard = ({ item, isCompleted, onComplete }) => {
+const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [timeLeft, setTimeLeft] = useState(0);
     const [isPrep, setIsPrep] = useState(false);
@@ -40,17 +40,17 @@ const ExerciseCard = ({ item, isCompleted, onComplete }) => {
         <TouchableOpacity 
             activeOpacity={0.8}
             onPress={toggleExpanded}
-            style={[styles.exerciseCard, isExpanded && styles.expandCard, isCompleted && styles.completedCard]}
+            style={[styles.exerciseCard, isExpanded && styles.expandCard, isCompleted && styles.completedCard, isProgramFinished && styles.finishedProgramCard]}
         >
             <View style={styles.headerRow}>
-                <Text style={[styles.exerciseTitle, isCompleted && styles.completedText]}>
-                    {item.title} {isCompleted && '✓'}
+                <Text style={[styles.exerciseTitle, isCompleted && styles.completedTitle, isProgramFinished && styles.finishedProgramTitle]}>
+                    {item.title}{isCompleted}
                 </Text>
             </View>
             
             {!isExpanded && (
                 <Text numberOfLines={1} style={[styles.exerciseInfo, isTiming && styles.activeTimerPreview]}>
-                    {isTiming ? (`${isPrep ? 'Ready' : 'Go'}: ${timeLeft}s`) : isCompleted ? ('Done! ✓') : (item.desc)}
+                    {isTiming ? (`${isPrep ? 'Ready' : 'Go'}: ${timeLeft}s`) : isCompleted ? ('Done!') : (item.desc)}
                 </Text>
             )}
 

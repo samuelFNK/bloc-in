@@ -16,17 +16,25 @@ export const styles = StyleSheet.create({
     },
     expandCard: {
         borderColor: '#a8a8a8',
-        borderWidth: 1,
     },
     completedCard: {
         backgroundColor: '#eaffea',
-        borderColor: '#4caf50',
-        borderWidth: 1,
-        elevation: 1,
+        borderColor: '#4caf50',      
     },
-    completedText: {
+    finishedProgramCard: {
+        backgroundColor: '#FFF9E6', 
+        borderColor: '#FFD700',            
+    },
+    completedTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
         color: '#2e7d32',
         textDecorationLine: 'line-through',
+    },
+    finishedProgramTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#B8860B',           
     },
     exerciseTitle: {
         fontSize: 20,

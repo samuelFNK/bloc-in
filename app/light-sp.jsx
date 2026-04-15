@@ -7,6 +7,8 @@ const LightSP = () => {
     const [program, setProgram] = useState([]);
     const [completedIds, setCompletedIds] = useState([]);
 
+    const isProgramFinished = program.length > 0 && program.length === completedIds.length; 
+
     useEffect(() => {
         const exercises = [...stretchExecises].sort(() => 0.5 - Math.random()).slice(0, 3);
         setProgram(exercises);
@@ -28,6 +30,7 @@ const LightSP = () => {
                         item={item} 
                         isCompleted={completedIds.includes(item.id)}
                         onComplete={handleComplete}
+                        isProgramFinished={isProgramFinished}
                     />
                 )}
             />
