@@ -31,7 +31,7 @@ export const stretchExecises = [
     },
     {
         id: 6,
-        title: '6',
+        title: 'Stretch 6',
         desc: 'Explanation 6...',
         durationSec: 6,
     },
