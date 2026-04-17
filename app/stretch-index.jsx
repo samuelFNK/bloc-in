@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { Link } from 'expo-router'
+import { theme } from '../theme'
 
 const StretchIndex = () => {
     return (
@@ -23,23 +24,24 @@ const styles = StyleSheet.create({
     },
     card_container: {
         flex: 1,
-        backgroundColor: '#e7e7e7',
-        padding: 50,
-        borderRadius: 5,
+        backgroundColor: theme.colors.background,
+        padding: theme.spacing.huge,
+        borderRadius: theme.shape.stiffRadius,
     },
     program_card: {
-        fontSize: 15,
+        color: theme.colors.text,
+        fontSize: theme.font.sizeMedium,
         textAlign: 'center',
-        backgroundColor: '#ffffff',
-        borderRadius: 12,
-        padding: 50,
-        margin:12,
-        elevation: 3,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-        borderWidth: 1,
+        backgroundColor: theme.colors.background,
+        borderRadius: theme.shape.softRadius,
+        padding: theme.spacing.huge,
+        margin: theme.spacing.medium,
+        elevation: theme.shape.smallElevation,
+        shadowColor: theme.colors.shadow,
+        shadowOffset: { width: theme.shape.shadowWidth, height: theme.shape.shadowHeight },
+        shadowOpacity: theme.shape.shadowOpacity,
+        shadowRadius: theme.shape.shadowRadius,
+        borderWidth: theme.shape.borderWidth,
         borderColor: 'transparent',
         
 

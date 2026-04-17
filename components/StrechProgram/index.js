@@ -3,6 +3,8 @@ import { StyleSheet, View, FlatList, Alert } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { stretchExecises } from '../../constants/stretch-exercises';
 import ExerciseCard from '../../components/ExerciseCard';
+import { theme } from '../../theme'
+
 
 const StretchProgram = ({ exerciseCount }) => {
     const navigation = useNavigation();
@@ -67,8 +69,8 @@ export default StretchProgram;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f5f5f5',
-        paddingTop: 50,
-        paddingHorizontal: 20,
+        backgroundColor: theme.colors.background,
+        paddingTop: theme.spacing.huge,
+        paddingHorizontal: theme.spacing.large,
     },
 });

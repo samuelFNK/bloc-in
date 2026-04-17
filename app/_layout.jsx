@@ -1,11 +1,12 @@
 import { View } from 'react-native'
 import { Stack } from 'expo-router'
+import { theme } from '../theme'
 
 const RootLayout = () => {
     return (
         <Stack screenOptions={{
-            headerStyle: { backgroundColor: '#ddd'},
-            headerTintColor: '#333'
+            headerStyle: { backgroundColor: theme.colors.background},
+            headerTintColor: theme.colors.text,
             }}>
             <Stack.Screen name="index" options={{ headerShown: false}}/>
             <Stack.Screen name="stretch-index" options={{ title: 'Programs'}}/>
