@@ -6,7 +6,9 @@ const Home = () => {
     return (
         <View style={styles.container}>
            
-            <Link href="/stretch-index" style={styles.card}>Stretch</Link>
+            <Link href="/stretch-index" style={styles.card}>
+                Strech
+            </Link>
             
         </View>
     )
@@ -22,9 +24,10 @@ const styles = StyleSheet.create({
         backgroundColor: theme.colors.background,
     },
     card: {
+        fontFamily: theme.font.family, 
         fontSize: theme.font.sizeMedium,
         color: theme.colors.text,
-        backgroundColor: theme.colors.background,
+        backgroundColor: theme.colors.cardBackground,
         padding: theme.spacing.huge,
         borderRadius: theme.shape.softRadius,
         elevation: theme.shape.smallElevation,

@@ -3,7 +3,7 @@ import { theme } from '../../theme'
 
 export const styles = StyleSheet.create({
     exerciseCard: {
-        backgroundColor: theme.colors.background,
+        backgroundColor: theme.colors.cardBackground,
         padding: theme.spacing.large,
         borderRadius: theme.shape.softRadius,
         margin: theme.spacing.large,
@@ -27,27 +27,28 @@ export const styles = StyleSheet.create({
         borderColor: theme.colors.victoryAccent,            
     },
     completedTitle: {
+        fontFamily: theme.font.family,
         fontSize: theme.font.sizeLarge,
-        fontWeight: 'bold',
         color: theme.colors.successDark,
         textDecorationLine: 'line-through',
     },
     finishedProgramTitle: {
         fontSize: theme.font.sizeLarge,
-        fontWeight: 'bold',
         color: theme.colors.victoryDark,           
     },
     exerciseTitle: {
+        fontFamily: theme.font.family,
         fontSize: theme.font.sizeLarge,
-        fontWeight: 'bold',
         color: theme.colors.text,
     },
     exerciseInfo: {
+        fontFamily: theme.font.family,
         fontSize: theme.font.sizeMedium,
         color: theme.colors.textSecondary,
         marginTop: theme.spacing.tiny,
     },
     activeTimerPreview: {
+        fontFamily: theme.font.family,
         color: theme.colors.text,
     },
     headerRow: {
@@ -72,19 +73,20 @@ export const styles = StyleSheet.create({
         marginBottom: 15,
     },
     fullDesc: {
+        fontFamily: theme.font.family,
         fontSize: theme.font.sizeMedium,
         lineHeight: theme.font.lineHeight,
         color: theme.colors.text,
         marginBottom: theme.spacing.medium,
     },
     timerTag: {
+        fontFamily: theme.font.family,
         fontSize: theme.font.sizeMedium,
-        fontWeight: 'bold',
         color: theme.colors.text,
         marginBottom: theme.spacing.small,
     },
     timerStartBtn: {
-        backgroundColor: theme.colors.primary,
+        backgroundColor: theme.colors.successDark,
         paddingVertical: theme.spacing.small,
         borderRadius: theme.shape.stiffRadius,
         alignItems: 'center',
@@ -93,11 +95,11 @@ export const styles = StyleSheet.create({
     completedTimerBtn: {
         backgroundColor: theme.colors.successDark,
     },
-    prepMode: { backgroundColor: theme.colors.victory },
-    activeMode: { backgroundColor: theme.colors.success },
+    prepMode: { backgroundColor: theme.colors.surface },
+    activeMode: { backgroundColor: theme.colors.primary },
     timerBtnText: {
+        fontFamily: theme.font.family,
         color: theme.colors.white,
-        fontWeight: 'bold',
         fontSize: theme.font.sizeMedium,
     },
 });

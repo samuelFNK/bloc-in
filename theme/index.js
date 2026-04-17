@@ -1,26 +1,26 @@
 export const theme = {
     colors: {
-        primary: '#333333',
-        background: '#FFFFFF',
-        surface: '#E8E8E8',
-        border: '#EEEEEE',
-        borderFocused: '#A8A8A8',
-        shadow: '#000',
+        background: '#141715',      
+        cardBackground: '#262D29',  
+        surface: '#333D38',         
+        
+        primary: '#47FFA3',         
+        border: '#4A5750',         
+        borderFocused: '#47FFA3',   
+        shadow: '#000000',
 
-        text: '#333333',
-        textSecondary: '#777777',
-        textLight: '#999999',
+        text: '#FFFFFF',            
+        textSecondary: '#B0BCB6',   
+        textLight: '#7E8C85',       
         white: '#FFFFFF',
         
-        success: '#4CAF50',
-        successLight: '#EAFFEA',
-        successDark: '#2E7D32',
+        success: '#00E676',        
+        successDark: '#1E4532',     
         
-        victory: '#FF9800',
-        victoryLight: '#FFF9E6',
-        victoryDark: '#B8860B',
-        victoryAccent: '#FFD700',
-        
+        victory: '#FF4D88',      
+        victoryLight: '#2D141C',    
+        victoryDark: '#B32D5B',     
+        victoryAccent: '#FF4D88',
     },
     spacing: {
         tiny: 4,
@@ -30,20 +30,20 @@ export const theme = {
         huge: 50,
     },
     shape: {
-        stiffRadius: 8,
-        softRadius: 12,
-        borderWidth: 1,
+        stiffRadius: 7,            
+        softRadius: 12,           
+        borderWidth: 0.7,           
 
-        smallElevation: 3,
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
-
+        smallElevation: 10,        
+        shadowOpacity: 0.9,         
+        shadowRadius: 15,
         shadowWidth: 0,
-        shadowHeight: 2,
+        shadowHeight: 10,
     },
     font: {
+        family: 'sans-serif-thin',
         sizeLarge: 20,
         sizeMedium: 14,
-        lineHeight: 22,
-    }
+        lineHeight: 20,
+    },
 };
