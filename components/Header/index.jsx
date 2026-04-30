@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: theme.spacing.medium,
-        paddingVertical: theme.spacing.large,
+        paddingTop: theme.spacing.large,
     },
     leftContainer: {
         width: 40,

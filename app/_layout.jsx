@@ -10,7 +10,7 @@ const RootLayout = () => {
             <Stack screenOptions={{
                 animation: 'fade',
 
-                header: ({ options, navigation }) => {
+                header: ({ options, navigation, route }) => {
                     if (options.headerShown === false){
                         return null;
                     }
@@ -20,10 +20,10 @@ const RootLayout = () => {
                 },
             }}>
                 <Stack.Screen name="index" options={{ headerShown: false }}/>
-                <Stack.Screen name="stretch-index" options={{ title: 'Programs'}}/>
-                <Stack.Screen name="light-sp" options={{ title: 'Light'}}/>
-                <Stack.Screen name="medium-sp" options={{ title: 'Medium'}}/>
-                <Stack.Screen name="full-sp" options={{ title: 'Full'}}/>
+                <Stack.Screen name="stretching/stretch-index" options={{ title: 'Programs'}}/>
+                <Stack.Screen name="stretching/light-sp" options={{ title: 'Light'}}/>
+                <Stack.Screen name="stretching/medium-sp" options={{ title: 'Medium'}}/>
+                <Stack.Screen name="stretching/full-sp" options={{ title: 'Full'}}/>
             </Stack> 
         </View>
     )
