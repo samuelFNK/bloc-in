@@ -1,4 +1,4 @@
-import StretchProgram from '../components/StrechProgram';
+import StretchProgram from '../../components/StrechProgram';
 
 const MediumSP = () => <StretchProgram exerciseCount={5} />;
 

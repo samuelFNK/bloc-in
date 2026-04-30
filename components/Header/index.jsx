@@ -7,7 +7,7 @@ export const Header = ({ title, canGoBack }) => {
     const router = useRouter();
 
     return (
-        <SafeAreaView style={{ backgroundColor: theme.colors.cardBackground }}>
+        <SafeAreaView style={{ backgroundColor: theme.colors.background }}>
             <View style={styles.headerContainer}>
                 <View style={styles.leftContainer}>
                     {canGoBack && (

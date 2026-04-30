@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { Link } from 'expo-router'
-import { theme } from '../theme'
+import { theme } from '../../theme'
 
 const StretchIndex = () => {
     return (
         <View style={styles.card_container}>
 
-            <Link href="/light-sp" style={styles.program_card}>Light</Link>
-            <Link href="/medium-sp" style={styles.program_card}>Medium</Link>  
-            <Link href="/full-sp" style={styles.program_card}>Full</Link> 
+            <Link href="/stretching/light-sp" style={styles.program_card}>Light</Link>
+            <Link href="/stretching/medium-sp" style={styles.program_card}>Medium</Link>  
+            <Link href="/stretching/full-sp" style={styles.program_card}>Full</Link> 
                     
         </View>
     )

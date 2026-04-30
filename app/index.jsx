@@ -6,7 +6,7 @@ const Home = () => {
     return (
         <View style={styles.container}>
            
-            <Link href="/stretch-index" style={styles.card}>
+            <Link href="/stretching/stretch-index" style={styles.card}>
                 Strech
             </Link>
             
