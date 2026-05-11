@@ -57,8 +57,9 @@ const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
             {isExpanded && (
                 <View style={styles.expandedContent}>
                     <View style={styles.imagePlaceholder}>
-                        <Text style={{color: '#999'}}>Image placeholder</Text>
+                        <Text style={{color: '#999'}}>Placeholder for .SVG images</Text>
                     </View>
+
                     <Text style={styles.fullDesc}>{item.desc}</Text>
 
                     {isTiming ? (

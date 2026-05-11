@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
         backgroundColor: theme.colors.successDark,
     },
     prepMode: { backgroundColor: theme.colors.surface },
-    activeMode: { backgroundColor: theme.colors.primary },
+    activeMode: { backgroundColor: theme.colors.surface },
     timerBtnText: {
         fontFamily: theme.font.family,
         color: theme.colors.white,
