@@ -4,26 +4,54 @@ import { styles } from './styles';
 
 const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
     const [isExpanded, setIsExpanded] = useState(false);
+
     const [timeLeft, setTimeLeft] = useState(0);
     const [isPrep, setIsPrep] = useState(false);
     const [isTiming, setIsTiming] = useState(false);
 
+    const [side, setSide] = useState("A");
+    const [isAlternating, setIsAlternating] = useState(false);
+
     useEffect(() => {
         let interval = null;
+
         if (isTiming && timeLeft > 0) {
             interval = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
-        } else if (isTiming && timeLeft === 0) {
+        } 
+        else if (isTiming && timeLeft === 0) {
+            //start exercise
             if (isPrep) {
                 setIsPrep(false);
-                setTimeLeft(item.durationSec);
-            } else {
+                
+                if (item.alternating){
+                    setTimeLeft(item.durationSec / 2);
+                } else {
+                    setTimeLeft(item.durationSec);
+                }
+
+            }
+            //alternate
+            else if (item.alternating && side === "A" && !isAlternating){
+                setIsAlternating(true);
+                setTimeLeft(3);
+            }
+            //start side B of alternating exercise 
+            else if (item.alternating && side === "A" && isAlternating){
+                setIsAlternating(false);
+                setSide("B");
+                setTimeLeft(item.durationSec / 2);
+            }
+            //end exercise
+            else {
                 setIsTiming(false);
+                setSide("A");
+                setIsAlternating(false);
                 onComplete(item.id);
                 LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
             }
         }
         return () => clearInterval(interval);
-    }, [isTiming, timeLeft, isPrep]);
+    }, [isTiming, timeLeft, isPrep, isAlternating, side]);
 
     const toggleExpanded = () => {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -31,10 +59,20 @@ const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
     };
 
     const startTimer = () => {
+        setSide("A");
+        setIsAlternating(false);
         setTimeLeft(3);
         setIsPrep(true);
         setIsTiming(true);
     };
+
+    const renderTimerText = () => {
+        if (!isTiming && isCompleted) return "Done!";   
+        if (isPrep) return `READY: ${timeLeft}`;
+        if (isAlternating) return `SWITCH SIDES: ${timeLeft}`;
+        if (item.alternating) return `GO (side ${side}): ${timeLeft}s`;
+        return `GO: ${timeLeft}s`
+    }
 
     return (
         <TouchableOpacity 
@@ -50,7 +88,7 @@ const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
             
             {!isExpanded && (
                 <Text numberOfLines={1} style={[styles.exerciseInfo, isTiming && styles.activeTimerPreview]}>
-                    {isTiming ? (`${isPrep ? 'Ready' : 'Go'}: ${timeLeft}s`) : isCompleted ? ('Done!') : (item.desc)}
+                    {isTiming ? renderTimerText() : isCompleted ? ('Done!') : (item.desc)}
                 </Text>
             )}
 
@@ -65,12 +103,14 @@ const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
                     {isTiming ? (
                         <View style={[styles.timerStartBtn, isPrep ? styles.prepMode : styles.activeMode]}>
                             <Text style={styles.timerBtnText}>
-                                {isPrep ? `READY: ${timeLeft}` : `GO: ${timeLeft}s`}
+                                {renderTimerText()}
                             </Text>
                         </View>
                     ) : (
                         <View>
-                            <Text style={styles.timerTag}>{item.durationSec} Sec</Text>
+                            <Text style={styles.timerTag}>
+                                {item.alternating ? `${item.durationSec / 2} Sec x 2 (Alternating)` : `${item.durationSec} Sec`}
+                            </Text>
                             <TouchableOpacity 
                                 style={[styles.timerStartBtn, isCompleted && styles.completedTimerBtn]} 
                                 onPress={startTimer}
