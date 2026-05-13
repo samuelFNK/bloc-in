@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, LayoutAnimation } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, LayoutAnimation } from 'react-native';
 import { styles } from './styles';
 
 const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
@@ -94,9 +94,13 @@ const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
 
             {isExpanded && (
                 <View style={styles.expandedContent}>
-                    <View style={styles.imagePlaceholder}>
-                        <Text style={{color: '#999'}}>Placeholder for .SVG images</Text>
-                    </View>
+                    {item.img ? (
+                        <Image source={item.img} style={styles.img} resizeMode='cover'/>
+                    ) : (
+                        <View style={styles.imgPlaceholder}>
+                            <Text style={{color: '#999'}}>No Image Available</Text>
+                        </View>
+                    )}
 
                     <Text style={styles.fullDesc}>{item.desc}</Text>
 

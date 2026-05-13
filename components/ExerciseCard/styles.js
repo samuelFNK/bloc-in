@@ -63,7 +63,16 @@ export const styles = StyleSheet.create({
         borderTopWidth: theme.shape.borderWidth,
         borderTopColor: theme.colors.border,
     },
-    imagePlaceholder: {
+    img: {
+        width: '100%',
+        height: 180,
+        backgroundColor: '#e8e8e8',
+        borderRadius: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 15,
+    },
+    imgPlaceholder: {
         width: '100%',
         height: 180,
         backgroundColor: '#e8e8e8',
