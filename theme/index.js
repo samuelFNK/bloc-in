@@ -16,6 +16,8 @@ export const theme = {
         
         success: '#00E676',        
         successDark: '#1E4532',     
+
+        pauseGrey: '#2e2e2e',
         
         victory: '#FF4D88',      
         victoryLight: '#2D141C',    

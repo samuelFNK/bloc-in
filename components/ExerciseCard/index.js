@@ -8,6 +8,7 @@ const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
     const [timeLeft, setTimeLeft] = useState(0);
     const [isPrep, setIsPrep] = useState(false);
     const [isTiming, setIsTiming] = useState(false);
+    const [isPaused, setIsPaused] = useState(false);
 
     const [side, setSide] = useState("A");
     const [isAlternating, setIsAlternating] = useState(false);
@@ -15,10 +16,10 @@ const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
     useEffect(() => {
         let interval = null;
 
-        if (isTiming && timeLeft > 0) {
+        if (isTiming && !isPaused &&timeLeft > 0) {
             interval = setInterval(() => setTimeLeft(prev => prev - 1), 1000);
         } 
-        else if (isTiming && timeLeft === 0) {
+        else if (isTiming && !isPaused && timeLeft === 0) {
             //start exercise
             if (isPrep) {
                 setIsPrep(false);
@@ -51,7 +52,7 @@ const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
             }
         }
         return () => clearInterval(interval);
-    }, [isTiming, timeLeft, isPrep, isAlternating, side]);
+    }, [isTiming, timeLeft, isPrep, isPaused, isAlternating, side]);
 
     const toggleExpanded = () => {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -64,6 +65,11 @@ const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
         setTimeLeft(3);
         setIsPrep(true);
         setIsTiming(true);
+        setIsPaused(false);
+    };
+
+    const togglePause = () => {
+        setIsPaused(prev => !prev);
     };
 
     const renderTimerText = () => {
@@ -82,7 +88,7 @@ const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
         >
             <View style={styles.headerRow}>
                 <Text style={[styles.exerciseTitle, isCompleted && styles.completedTitle, isProgramFinished && styles.finishedProgramTitle]}>
-                    {item.title}{isCompleted}
+                    {item.title}
                 </Text>
             </View>
             
@@ -105,11 +111,15 @@ const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
                     <Text style={styles.fullDesc}>{item.desc}</Text>
 
                     {isTiming ? (
-                        <View style={[styles.timerStartBtn, isPrep ? styles.prepMode : styles.activeMode]}>
+                        <TouchableOpacity 
+                            onPress={togglePause}
+                            activeOpacity={0.8}
+                            style={[styles.timerStartBtn, isPrep ? styles.prepMode : styles.activeMode, isPaused && styles.pausedMode]}
+                        >
                             <Text style={styles.timerBtnText}>
                                 {renderTimerText()}
                             </Text>
-                        </View>
+                        </TouchableOpacity>
                     ) : (
                         <View>
                             <Text style={styles.timerTag}>
