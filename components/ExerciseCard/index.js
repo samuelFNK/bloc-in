@@ -74,6 +74,7 @@ const ExerciseCard = ({ item, isCompleted, onComplete, isProgramFinished }) => {
 
     const renderTimerText = () => {
         if (!isTiming && isCompleted) return "Done!";   
+        if (isPaused) return `PAUSED: ${timeLeft}`;
         if (isPrep) return `READY: ${timeLeft}`;
         if (isAlternating) return `SWITCH SIDES: ${timeLeft}`;
         if (item.alternating) return `GO (side ${side}): ${timeLeft}s`;
